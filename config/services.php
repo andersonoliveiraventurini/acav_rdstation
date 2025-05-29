@@ -34,14 +34,14 @@ return [
             'channel' => env('SLACK_BOT_USER_DEFAULT_CHANNEL'),
         ],
     ],
-    
+
     'rdstation' => [
-    'client_id' => env('RD_STATION_CLIENT_ID'),
-    'client_secret' => env('RD_STATION_CLIENT_SECRET'),
-    'access_token' => env('RD_STATION_ACCESS_TOKEN'),
-    'refresh_token' => env('RD_STATION_REFRESH_TOKEN'),
-    'pipeline_id' => env('RD_STATION_PIPELINE_ID'),
-],
+        'client_id' => env('RD_STATION_CLIENT_ID'),
+        'client_secret' => env('RD_STATION_CLIENT_SECRET'),
+        'access_token' => env('RD_STATION_ACCESS_TOKEN'),
+        'refresh_token' => env('RD_STATION_REFRESH_TOKEN'),
+        'pipeline_id' => env('RD_STATION_PIPELINE_ID'),
+    ],
 
 
 ];

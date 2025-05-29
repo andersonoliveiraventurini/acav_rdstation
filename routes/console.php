@@ -19,3 +19,21 @@ Schedule::command('app:processar-pedidos')
     ->onFailure(function () {
         Log::error('Falha ao processar pedidos.');
     });
+
+    Schedule::command('app:processar-orcamentos')
+    ->everyFiveMinutes()
+    ->onSuccess(function () {
+        Log::info('Orçamentos processados com sucesso.');
+    })
+    ->onFailure(function () {
+        Log::error('Falha ao processar orçamentos.');
+    });
+
+    Schedule::command('app:processar-clientes')
+    ->everyFiveMinutes()
+    ->onSuccess(function () {
+        Log::info('Clientes processados com sucesso.');
+    })
+    ->onFailure(function () {
+        Log::error('Falha ao processar clientes.');
+    });

@@ -1,41 +1,40 @@
 services:
-  laravel.test:
-    build:
-      context: './vendor/laravel/sail/runtimes/8.4'
-      dockerfile: Dockerfile
-      args:
-        WWWGROUP: '${WWWGROUP}'
-    image: 'sail-8.4/app'
-    extra_hosts:
-      - 'host.docker.internal:host-gateway'
-    ports:
-      - '${APP_PORT:-80}:80'
-      - '${VITE_PORT:-5173}:${VITE_PORT:-5173}'
-    environment:
-      WWWUSER: '${WWWUSER}'
-      LARAVEL_SAIL: 1
-      XDEBUG_MODE: '${SAIL_XDEBUG_MODE:-off}'
-      XDEBUG_CONFIG: '${SAIL_XDEBUG_CONFIG:-client_host=host.docker.internal}'
-      IGNITION_LOCAL_SITES_PATH: '${PWD}'
-    volumes:
-      - '.:/var/www/html'
-    networks:
-      - sail
-    depends_on:
-      - mysql
-      - redis
-      - meilisearch
-      - mailpit
-      - selenium
+    acav_rdstation:
+        build:
+            context: .
+        ports:
+            - "8085:8002"
+        volumes:
+            - .:/var/www/html
+        environment:
+            APP_PORT: 8002
+            APP_URL: http://localhost:8085
+            DB_HOST: mysql
+            DB_PORT: 3306
+            DB_DATABASE: ${DB_DATABASE}
+            DB_USERNAME: ${DB_USERNAME}
+            DB_PASSWORD: ${DB_PASSWORD}
+        depends_on:
+            - mysql
 
-  scheduler:
-    image: 'sail-8.4/app'
-    depends_on:
-      - laravel.test
-    volumes:
-      - '.:/var/www/html'
-    entrypoint: ["/bin/sh", "-c", "while :; do php artisan schedule:run --verbose --no-interaction & sleep 60; done"]
-    networks:
-      - sail
+    mysql:
+        image: 'mysql:latest'
+        ports:
+            - '${FORWARD_DB_PORT:-3306}:3306'
+        environment:
+            MYSQL_ROOT_PASSWORD: '${DB_PASSWORD}'
+            MYSQL_ROOT_HOST: '%'
+            MYSQL_DATABASE: '${DB_DATABASE}'
+            MYSQL_USER: '${DB_USERNAME}'
+            MYSQL_PASSWORD: '${DB_PASSWORD}'
+            MYSQL_ALLOW_EMPTY_PASSWORD: 1
+            TZ: 'America/Sao_Paulo'
+            LANG: 'pt_BR.UTF-8'
+            LC_ALL: 'pt_BR.UTF-8'
+            MYSQL_CHARACTER_SET_SERVER: 'utf8mb4'
+            MYSQL_COLLATION_SERVER: 'utf8mb4_unicode_ci'
+        volumes:
+            - 'sail-mysql:/var/lib/mysql'
 
-# ... (demais serviços e configurações)
+volumes:
+    sail-mysql:

@@ -20,3 +20,9 @@ Route::middleware(['auth'])->group(function () {
 });
 
 require __DIR__.'/auth.php';
+
+use Pedroni\RdStation\Controllers\OAuthInstall;
+use Pedroni\RdStation\Controllers\OAuthCallback;
+
+Route::get('rd-station/oauth/install', OAuthInstall::class);
+Route::get('rd-station/oauth/callback', OAuthCallback::class); // recomendado

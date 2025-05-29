@@ -28,6 +28,18 @@ return [
 
     'env' => env('APP_ENV', 'production'),
 
+ /*
+    |--------------------------------------------------------------------------
+    | RD Station
+    |--------------------------------------------------------------------------
+    |
+    |
+    */
+    
+    'rd_token' => env('RD_STATION_PIPELINE_PEDIDO_ID'),
+    'rd_orcamento' => env('RD_STATION_PIPELINE_ORCAMENTO_ID', ),
+    'rd_cliente' => env('RD_STATION_PIPELINE_CLIENTES_ID'),
+
     /*
     |--------------------------------------------------------------------------
     | Application Debug Mode

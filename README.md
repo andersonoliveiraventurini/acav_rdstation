@@ -5,7 +5,7 @@ O projeto executa Laravel junto ao container de Mysql, dentro de um container do
 
 Para executar o projeto é necessário executar o container e após isso executar o "bash", que seria o terminal, dentro do container. Assim será possível instalar os componentes e atualizar, caso necessário:
 
-docker compose up -d –-build
+docker compose up -d
 
 docker exec -it nome-servico bash
 

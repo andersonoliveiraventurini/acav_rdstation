@@ -14,6 +14,11 @@ return new class extends Migration
         Schema::create('pedidos_brcom', function (Blueprint $table) {
             $table->id();
             $table->timestamp('enviado_api')->nullable();
+            // funil de vendas no RD Station            
+            $table->string('pipeline_id')->nullable()->comment('ID do funil de vendas no RD Station');
+            $table->string('stage_id')->nullable()->comment('ID da etapa do funil de vendas no RD Station');
+            $table->string('rdstation_id')->nullable()->comment('ID do orçamento no RD Station');
+            $table->string('rdstation_status')->default(''); // Status do orçamento no RD Station
             $table->integer('orca')->nullable();
             $table->double('qtd')->nullable();
             $table->decimal('vista', 19, 4)->nullable();

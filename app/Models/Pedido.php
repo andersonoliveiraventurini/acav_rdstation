@@ -11,9 +11,14 @@ class Pedido extends Model
     /** @use HasFactory<\Database\Factories\PedidoFactory> */
     use HasFactory, SoftDeletes;
 
-    protected $table = 'pedidos_brcom';
-
+    protected $table = 'pedido_rdstations';
     protected $fillable = [
+        'enviado_api',
+        // funil de vendas no RD Station            
+        'pipeline_id',
+        'stage_id',
+        'rdstation_id',
+        'rdstation_status',
         'orca',
         'qtd',
         'vista',
@@ -32,41 +37,6 @@ class Pedido extends Model
         'custot',
         'obs',
         'vendedor',
-        'data',
-        'enviado_api'
+        'data'
     ];
-
-    protected $casts = [
-        'data' => 'datetime',
-    ];
-
-    public function createOpportunityPayload()
-    {
-        return [
-            'deal' => [
-                'name' => $this->descricao,
-                'title' => "Orçamento {$this->orca} - {$this->nome}",
-                'pipeline_id' => config('services.rdstation.pipeline_id'),
-                'contact_id' => $this->getRdContactId(),
-                'deal_custom_fields' => [
-                    [
-                        'custom_field_id' => 'SEU_ID_CAMPO_ORCAMENTO',
-                        'value' => $this->orca
-                    ],
-                    [
-                        'custom_field_id' => 'SEU_ID_CAMPO_VALOR',
-                        'value' => $this->tvista
-                    ],
-                    // Adicione outros campos customizados do seu funil
-                ]
-            ]
-        ];
-    }
-
-    protected function getRdContactId()
-    {
-        // Implemente lógica para buscar/relacionar com o Contact ID no RD
-        // Pode ser via relação com outra model ou API
-        return null;
-    }
 }

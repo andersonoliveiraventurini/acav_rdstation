@@ -27,6 +27,9 @@ class ProcessarPedidos extends Command
      */
     public function handle()
     {
+        
+
+
         $pedidos = Pedido::whereNull('enviado_api')->get();
         if ($pedidos->isEmpty()) {
             $this->info('Nenhum pedido para processar.');

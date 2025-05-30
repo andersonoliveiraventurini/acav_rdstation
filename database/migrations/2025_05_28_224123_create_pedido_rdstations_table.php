@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('pedido_rdstations', function (Blueprint $table) {
-            $table->foreignId('customer_id')->constrained()->onDelete('cascade');
+            $table->foreignId('cliente_id')->constrained()->onDelete('cascade');
             $table->string('order_id')->unique();
             $table->decimal('value', 10, 2);
             $table->string('currency', 3)->default('BRL');

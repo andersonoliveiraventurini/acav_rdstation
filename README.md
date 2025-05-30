@@ -7,6 +7,8 @@ Para executar o projeto é necessário executar o container e após isso executa
 
 docker compose up -d
 
+# o comando docker ps listará os serviços sendo executados (nesse ponto a aplicação e o mysql devem estar sendo executados)
+
 docker exec -it nome-servico bash
 
 Então executar - dentro do bash: 
